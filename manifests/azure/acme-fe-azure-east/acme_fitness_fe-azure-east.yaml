@@ -37,7 +37,7 @@ spec:
         service: shopping
     spec:
       containers:
-      - image: harbor.tanzuworld.com/niran-acme/shopping-azure-east:v0.2
+      - image: public.ecr.aws/d4u1y0j1/shopping-azure-east:v0.1
         name: shopping
         env:
         - name: FRONTEND_PORT

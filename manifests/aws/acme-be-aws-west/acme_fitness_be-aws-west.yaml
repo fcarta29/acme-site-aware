@@ -268,7 +268,7 @@ spec:
       - name: catalog-data
         emptyDir: {}
       containers:
-      - image: harbor.tanzuworld.com/niran-acme/catalog-aws-west:v0.2
+      - image: public.ecr.aws/d4u1y0j1/catalog-aws-west:v0.1
         name: catalog
         env:
         - name: CATALOG_DB_HOST

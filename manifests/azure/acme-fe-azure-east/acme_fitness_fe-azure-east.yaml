@@ -5,7 +5,6 @@ metadata:
   name: shopping
   labels:
     app: shopping
-    service: shopping
 spec:
   ports:
     - name: http-shopping
@@ -13,12 +12,11 @@ spec:
       port: 3000
   selector:
     app: shopping
-    service: shopping
 ---
 apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
-  name: shopping
+  name: shopping-v1
   labels:
     app: shopping
     service: shopping
@@ -27,6 +25,7 @@ spec:
     matchLabels:
       app: shopping
       service: shopping
+      version: shopping-v1
   strategy:
     type: Recreate
   replicas: 1
@@ -35,11 +34,15 @@ spec:
       labels:
         app: shopping
         service: shopping
+        version: shopping-v1
     spec:
       containers:
-      - image: public.ecr.aws/d4u1y0j1/shopping-azure-east:v0.1
+#     - image: public.ecr.aws/d4u1y0j1/shopping-azure-east:v0.1      
+      - image: rroque99/shopping:dynamic
         name: shopping
         env:
+        - name: SHOPPING_TEXT
+          value: 'THIS FRONTEND IS RUNNING IN AZURE EAST - VERSION-1'
         - name: FRONTEND_PORT
           value: '3000'
         - name: USERS_HOST
